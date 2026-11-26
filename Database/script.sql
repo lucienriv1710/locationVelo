@@ -1,3 +1,4 @@
+-- Active: 1770213399978@@127.0.0.1@8889@location_velo
 CREATE DATABASE IF NOT EXISTS `location_velo`
   CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `location_velo`;
