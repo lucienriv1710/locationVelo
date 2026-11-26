@@ -1,5 +1,7 @@
 <?php
-// Configuration locale : adapte ces valeurs à ta machine.
+// Modèle de configuration.
+// Copie ce fichier en config/config.php puis adapte les valeurs à ta machine.
+// config/config.php est ignoré par git : tes réglages restent chez toi.
 
 return [
     'db' => [

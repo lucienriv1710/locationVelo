@@ -1,5 +1,13 @@
 # Location de vélos
 
+## Installation
+
+Prérequis : PHP 8.1+, Composer, MySQL (MAMP).
+
+1. `composer install` — génère `vendor/` (chargement automatique des classes).
+2. Crée la base : importe `Database/script.sql` dans phpMyAdmin (onglet « Importer »).
+3. `cp config/config.example.php config/config.php`, puis adapte le port et les identifiants MySQL si tu n'utilises pas MAMP.
+
 ## Architecture (MVC)
 
 ```

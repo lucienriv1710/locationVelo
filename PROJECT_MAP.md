@@ -16,8 +16,8 @@ Sujet complet : `location_de_velos.pdf`.
 | `index.php` | Page HTML vide (placeholder du premier commit). Pas encore de point d'entrée MVC. |
 | `script.sql` | Script SQL **original** fourni par le formateur (référence, non utilisé : `login INT`, pas de `role`). |
 | `composer.json` / `composer.lock` | Autoload PSR-4 : `App\` → `app/`. Aucune dépendance externe. `vendor/` généré par `composer install`. |
-| `.gitignore` | Exclut `/vendor/`. |
-| `README.md` | Architecture MVC du projet. |
+| `.gitignore` | Exclut `/vendor/` et `/config/config.php`. |
+| `README.md` | Instructions d'installation (composer, BDD, config) + architecture MVC. |
 | `location_de_velos.pdf` | Sujet du TP. |
 
 ### `Database/`
@@ -28,7 +28,8 @@ Sujet complet : `location_de_velos.pdf`.
 ### `config/`
 | Fichier | Rôle |
 |---|---|
-| `config/config.php` | Retourne un tableau `['db' => host, port (8889 MAMP), name, user, password, charset]`. Suivi par git. |
+| `config/config.example.php` | Modèle suivi par git (valeurs MAMP par défaut). À copier en `config/config.php`. |
+| `config/config.php` | Config locale, **ignorée par git**. Retourne `['db' => host, port, name, user, password, charset]`. Lue par `Database.php`. |
 
 ### `app/` (MVC)
 | Fichier / dossier | Rôle |
@@ -41,10 +42,11 @@ Sujet complet : `location_de_velos.pdf`.
 | `app/Views/public/` | Vues de l'interface publique — vide. |
 | `app/Views/admin/` | Vues du tableau de bord — vide. |
 
-### `public/` (non suivi par git : dossiers vides)
-| Dossier | Rôle |
+### `public/`
+| Fichier / dossier | Rôle |
 |---|---|
-| `public/assets/css/`, `js/`, `img/bikes/` | CSS, JS (AJAX), photos des vélos — vides. |
+| `public/assets/css/style.css` | CSS natif responsive (mobile first, sans bibliothèque). Variables `:root`, `.container`, `.header`/`.nav`, `.grid` (1 col → 2 cols ≥ 768px → 3 cols ≥ 1024px), `.card`, formulaires, `.btn`/`.btn-danger`, `.table-wrapper` (défilement horizontal), `.alert`, `.badge-pending/accepted/rejected`. |
+| `public/assets/js/`, `img/bikes/` | JS (AJAX) et photos des vélos — vides. |
 
 ## Base de données (`location_velo`)
 
@@ -65,13 +67,14 @@ Aucune pour l'instant (pas de routeur ni de `public/index.php`).
 
 ## Reste à faire (étape Setup)
 
-- Bootstrap / CSS responsive (prévu plus tard, pas encore choisi : CDN ou local).
-- README : instructions d'installation (`composer install`, création BDD, config).
-- Optionnel : `config/config.example.php` + `config/config.php` dans `.gitignore`.
+- Aucun pour l'étape Setup. Responsive en CSS natif (pas de Bootstrap). `style.css` sera relié quand le gabarit `Views/layouts/` existera.
 
 ## Dernières modifications
 
 | Date | Fichier | Résumé |
 |---|---|---|
+| 2026-11-26 | `public/assets/css/style.css` | Création du CSS natif responsive (choix : pas de Bootstrap). Testé à 375 / 768 / 1280 px. |
+| 2026-11-26 | `config/`, `.gitignore`, `README.md` | Ajout de `config.example.php`, `config.php` ignoré par git, section Installation dans le README. |
+| 2026-11-26 | `config/config.php` (local) | Mot de passe MySQL remis à `root` (vide = connexion refusée par MAMP). |
 | 2026-11-26 | `PROJECT_MAP.md` | Création de l'index du projet. |
 | 2026-11-26 | `main` | Fusion de `setup/projeLeo` : Composer, `config/config.php`, `Database.php` avec namespace + config, `.gitignore`, suppression de `create_admin.php`. |
