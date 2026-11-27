@@ -1,23 +1,31 @@
 # Location de vélos
 
-## Architecture (MVC)
+Application PHP MVC de gestion des comptes employés, des vélos et des demandes
+de réservation.
 
-```
-locationVelo/
-├── app/
-│   ├── Database/              ← connexion à la base
-│   │   └── Database.php       ← connexion PDO (Singleton)
-│   ├── Controllers/           ← C : reçoivent la requête, appellent le modèle, choisissent la vue
-│   │   └── Admin/             ← contrôleurs du tableau de bord employés
-│   ├── Models/                ← M : accès aux tables (users, bikes, reservations)
-│   └── Views/                 ← V : HTML affiché
-│       ├── layouts/           ← gabarit commun (en-tête, menu, pied de page)
-│       ├── public/            ← pages de l'interface publique
-│       └── admin/             ← pages du tableau de bord employés
-└── public/                    ← seul dossier accessible depuis le navigateur
-    └── assets/
-        ├── css/
-        ├── js/                ← AJAX
-        └── img/
-            └── bikes/         ← photos des vélos
-```
+## Installation
+
+1. Démarrer MySQL et importer `Database/script.sql` (ou `script.sql`).
+2. Configurer la connexion avec les variables `DB_HOST`, `DB_PORT`, `DB_NAME`,
+   `DB_USER` et `DB_PASSWORD`. Par défaut, la configuration correspond à MAMP
+   (`127.0.0.1:3306`, base `location_velo`, utilisateur et mot de passe `root`).
+3. Créer le premier compte administrateur. Générer d’abord un hash :
+
+   ```sh
+   php -r "echo password_hash('choisir-un-mot-de-passe', PASSWORD_DEFAULT), PHP_EOL;"
+   ```
+
+   Puis insérer le compte dans MySQL en remplaçant le hash et les informations :
+
+   ```sql
+   INSERT INTO users (firstname, lastname, login, password, role)
+   VALUES ('Admin', 'Location', 'admin', 'COLLER_LE_HASH_ICI', 'admin');
+   ```
+
+4. Servir ce dossier avec PHP ou le placer dans le répertoire web de MAMP, puis
+   ouvrir `index.php?page=login`.
+
+Les contrôleurs sont dans `app/Controllers`, l’accès aux données dans
+`app/Models`, les vues dans `app/Views` et la connexion PDO dans
+`app/Database/Database.php`. Les photos des vélos sont enregistrées dans
+`assets/img/bikes`; elles sont limitées à 5 Mo et aux formats JPG, PNG et WEBP.
